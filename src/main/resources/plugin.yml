@@ -1,0 +1,13 @@
+name: SuperDarkCore
+version: 0.1
+description: Shared code between all SuperDark plugins
+api-version: 1.15
+
+authors: [EncryptedData, onnesh]
+
+main: net.superdark.minecraft.plugins.SuperDarkCore.SuperDarkCorePlugin
+
+permissions:
+  superdark.admin:
+    description: Gives admin permssion to user.
+    default: op
