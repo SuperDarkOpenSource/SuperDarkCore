@@ -1,6 +1,7 @@
 package net.superdark.minecraft.plugins.SuperDarkCore;
 
 import net.superdark.minecraft.plugins.SuperDarkCore.api.PlayerAPI;
+import net.superdark.minecraft.plugins.SuperDarkCore.api.TeleportAPI;
 import net.superdark.minecraft.plugins.SuperDarkCore.listeners.PlayerEvents;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -37,9 +38,15 @@ public class SuperDarkCorePlugin extends JavaPlugin
         return playerAPI_;
     }
 
+    public TeleportAPI getTeleportAPI()
+    {
+        return teleportAPI;
+    }
+
     private void createAPIs()
     {
         playerAPI_ = new PlayerAPI(this);
+        teleportAPI = new TeleportAPI(this);
     }
 
     private void destroyAPIs()
@@ -55,4 +62,6 @@ public class SuperDarkCorePlugin extends JavaPlugin
     private static SuperDarkCorePlugin instance_ = null;
 
     private PlayerAPI playerAPI_;
+
+    private TeleportAPI teleportAPI;
 }
