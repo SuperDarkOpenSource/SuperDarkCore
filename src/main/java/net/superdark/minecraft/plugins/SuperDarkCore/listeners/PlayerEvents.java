@@ -21,7 +21,7 @@ public class PlayerEvents implements Listener {
 
         this.playerAPI_ = playerAPI_;
 
-//player can be connected before a plugin register, so check for players and add them.
+        //player can be connected before a plugin register, so check for players and add them.
         for (Player p : instance_.getServer().getOnlinePlayers())
         {
             playerAPI_.registerPlayer(p.getName(), p.getUniqueId());
@@ -31,8 +31,9 @@ public class PlayerEvents implements Listener {
     @EventHandler
     private void OnPlayerJoinEvent(PlayerJoinEvent e)
     {
+        Player player = e.getPlayer();
+        playerAPI_.registerPlayer(player.getName(), player.getUniqueId());
 
-        playerAPI_.registerPlayer(e.getPlayer().getName(), e.getPlayer().getUniqueId());
     }
 
     @EventHandler
