@@ -26,6 +26,7 @@ public class SuperDarkCorePlugin extends JavaPlugin
     {
         // Don't leave memory leaking
         instance_ = null;
+        destroyAPIs();
     }
 
     static SuperDarkCorePlugin getInstance()
@@ -52,6 +53,7 @@ public class SuperDarkCorePlugin extends JavaPlugin
     private void destroyAPIs()
     {
         playerAPI_ = null;
+        teleportAPI = null;
     }
 
     private void createEvents()
