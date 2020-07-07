@@ -1,7 +1,7 @@
 name: SuperDarkCore
 version: 0.1
 description: Shared code between all SuperDark plugins
-api-version: 1.15
+api-version: 1.16
 
 authors: [EncryptedData, onnesh]
 
