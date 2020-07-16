@@ -1,5 +1,6 @@
 package net.superdark.minecraft.plugins.SuperDarkCore;
 
+import net.superdark.minecraft.plugins.SuperDarkCore.api.LoggerAPI;
 import net.superdark.minecraft.plugins.SuperDarkCore.api.PlayerAPI;
 import net.superdark.minecraft.plugins.SuperDarkCore.api.TeleportAPI;
 import net.superdark.minecraft.plugins.SuperDarkCore.listeners.PlayerEvents;
@@ -27,6 +28,9 @@ public class SuperDarkCorePlugin extends JavaPlugin
         // Don't leave memory leaking
         instance_ = null;
         destroyAPIs();
+
+        //Flush the logs
+        loggerAPI_.flush();
     }
 
     static SuperDarkCorePlugin getInstance()
@@ -44,16 +48,23 @@ public class SuperDarkCorePlugin extends JavaPlugin
         return teleportAPI;
     }
 
+    public LoggerAPI getLoggerAPI_() {
+        return loggerAPI_;
+    }
+
     private void createAPIs()
     {
         playerAPI_ = new PlayerAPI(this);
         teleportAPI = new TeleportAPI(this);
+        loggerAPI_ = new LoggerAPI(this);
+
     }
 
     private void destroyAPIs()
     {
         playerAPI_ = null;
         teleportAPI = null;
+        loggerAPI_ = null;
     }
 
     private void createEvents()
@@ -66,4 +77,6 @@ public class SuperDarkCorePlugin extends JavaPlugin
     private PlayerAPI playerAPI_;
 
     private TeleportAPI teleportAPI;
+
+    private LoggerAPI loggerAPI_;
 }
