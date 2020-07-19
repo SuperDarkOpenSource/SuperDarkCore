@@ -4,6 +4,7 @@ import net.superdark.minecraft.plugins.SuperDarkCore.api.LoggerAPI;
 import net.superdark.minecraft.plugins.SuperDarkCore.api.PlayerAPI;
 import net.superdark.minecraft.plugins.SuperDarkCore.api.TeleportAPI;
 import net.superdark.minecraft.plugins.SuperDarkCore.listeners.PlayerEvents;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class SuperDarkCorePlugin extends JavaPlugin
@@ -14,6 +15,9 @@ public class SuperDarkCorePlugin extends JavaPlugin
     {
         // Keep our instance so we can use it later
         instance_ = this;
+
+        //load the config
+        loadDefaultConfig();
 
         // Create our APIs
         createAPIs();
@@ -48,8 +52,14 @@ public class SuperDarkCorePlugin extends JavaPlugin
         return teleportAPI;
     }
 
+
     public LoggerAPI getLoggerAPI_() {
         return loggerAPI_;
+	}
+
+    //getConfig is a FileConfiguration method
+    public FileConfiguration getSuperDarkCoreConfig() {
+        return config;
     }
 
     private void createAPIs()
@@ -72,6 +82,14 @@ public class SuperDarkCorePlugin extends JavaPlugin
         new PlayerEvents(instance_, playerAPI_);
     }
 
+    private void loadDefaultConfig()
+    {
+        this.config = getConfig();
+        config.addDefault("LOG_TICK_INTERVAL", 6000);
+        config.options().copyDefaults(true);
+        saveConfig();
+    }
+
     private static SuperDarkCorePlugin instance_ = null;
 
     private PlayerAPI playerAPI_;
@@ -79,4 +97,6 @@ public class SuperDarkCorePlugin extends JavaPlugin
     private TeleportAPI teleportAPI;
 
     private LoggerAPI loggerAPI_;
+
+    private FileConfiguration config;
 }
