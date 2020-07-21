@@ -1,5 +1,6 @@
 package net.superdark.minecraft.plugins.SuperDarkCore;
 
+import net.superdark.minecraft.plugins.SuperDarkCore.api.DataTrackerAPI;
 import net.superdark.minecraft.plugins.SuperDarkCore.api.LoggerAPI;
 import net.superdark.minecraft.plugins.SuperDarkCore.api.PlayerAPI;
 import net.superdark.minecraft.plugins.SuperDarkCore.api.TeleportAPI;
@@ -52,10 +53,13 @@ public class SuperDarkCorePlugin extends JavaPlugin
         return teleportAPI;
     }
 
-
     public LoggerAPI getLoggerAPI_() {
         return loggerAPI_;
 	}
+
+    public DataTrackerAPI getDataTrackerAPI_() {
+        return dataTrackerAPI_;
+    }
 
     //getConfig is a FileConfiguration method
     public FileConfiguration getSuperDarkCoreConfig() {
@@ -67,7 +71,7 @@ public class SuperDarkCorePlugin extends JavaPlugin
         playerAPI_ = new PlayerAPI(this);
         teleportAPI = new TeleportAPI(this);
         loggerAPI_ = new LoggerAPI(this);
-
+        dataTrackerAPI_ = new DataTrackerAPI(this);
     }
 
     private void destroyAPIs()
@@ -99,4 +103,6 @@ public class SuperDarkCorePlugin extends JavaPlugin
     private LoggerAPI loggerAPI_;
 
     private FileConfiguration config;
+
+    private DataTrackerAPI dataTrackerAPI_;
 }
