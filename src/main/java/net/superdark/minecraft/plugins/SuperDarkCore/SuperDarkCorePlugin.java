@@ -37,7 +37,7 @@ public class SuperDarkCorePlugin extends JavaPlugin
         loggerAPI_.flush();
     }
 
-    static SuperDarkCorePlugin getInstance()
+    public static SuperDarkCorePlugin getInstance()
     {
         return instance_;
     }
