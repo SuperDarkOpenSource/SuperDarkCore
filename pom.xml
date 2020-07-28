@@ -10,10 +10,22 @@
 
     <repositories>
         <repository>
-            <id>maven-spigot</id>
-            <url>https://nexus.superdark.net/repository/maven-spigot/</url>
+            <id>superdark-maven</id>
+            <url>https://nexus.superdark.net/repository/maven/</url>
         </repository>
     </repositories>
+
+    <!-- For Deploying to our Maven Server. DO NOT COPY TO OTHER NON-LIBRARY PLUGINS -->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>maven-superdark-public</id>
+            <url>https://nexus.superdark.net/repository/maven-superdark-public/</url>
+        </snapshotRepository>
+        <repository>
+            <id>maven-superdark-public</id>
+            <url>https://nexus.superdark.net/repository/maven-superdark-public/</url>
+        </repository>
+    </distributionManagement>
 
     <dependencies>
         <dependency>
