@@ -32,10 +32,14 @@ public class SuperDarkCorePlugin extends JavaPlugin
     {
         // Don't leave memory leaking
         instance_ = null;
-        destroyAPIs();
+
+        //flush it down the toilet
+        dataTrackerAPI_.flush();
 
         //Flush the logs
         loggerAPI_.flush();
+
+        destroyAPIs();
     }
 
     public static SuperDarkCorePlugin getInstance()

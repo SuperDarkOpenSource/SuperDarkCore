@@ -4,13 +4,12 @@ import net.superdark.minecraft.plugins.SuperDarkCore.SuperDarkCorePlugin;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * The current plan for the DataTrackApi is to have each player's data be in a YAML file where the name of the file is the player's Minecraft UUID.
@@ -20,9 +19,12 @@ public class DataTrackerAPI {
 
     private SuperDarkCorePlugin superDarkCorePlugin_;
 
+    private HashMap<UUID, PlayerDataObject> toFlush = new LinkedHashMap<>();
+
     public DataTrackerAPI(SuperDarkCorePlugin instance)
     {
         this.superDarkCorePlugin_ = instance;
+        this.flushTask();
     }
 
     /**
@@ -55,6 +57,14 @@ public class DataTrackerAPI {
      */
     public PlayerDataObject getPlayerData(UUID uuid)
     {
+        //if the object is already about to be flushed, get it and remove it.
+        if (toFlush.containsKey(uuid))
+        {
+            PlayerDataObject obj = toFlush.get(uuid);
+            toFlush.remove(uuid);
+            return obj;
+        }
+
         FileConfiguration config = YamlConfiguration.loadConfiguration(getPlayerFile(uuid));
         ConfigurationSection data =  config.getConfigurationSection("data");
         if (data != null) {
@@ -69,7 +79,6 @@ public class DataTrackerAPI {
      */
     public void save(PlayerDataObject obj, UUID uuid)
     {
-        Map<String, Integer> toFile = obj.serialize();
         File pathToFile = getPlayerFile(uuid);
         FileConfiguration config = YamlConfiguration.loadConfiguration(pathToFile); // Remember, a blank config is returned if the yml file is malformed.
         config.createSection("data", obj.serialize()); //Any current data wll be overwritten.
@@ -80,7 +89,25 @@ public class DataTrackerAPI {
         }
     }
 
+    public void flush()
+    {
+        for (Map.Entry<UUID, PlayerDataObject> obj : this.toFlush.entrySet())
+        {
+            this.save(obj.getValue(), obj.getKey());
+        }
+    }
 
+    private void flushTask()
+    {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                flush();
+                superDarkCorePlugin_.getLogger().info("Flushing PlayerDataObjects.");
+                this.runTaskLater(superDarkCorePlugin_, 6000);
+            }
+        }.runTaskLater(superDarkCorePlugin_, 6000); //6000 ticks = 20(ticks per second) * 60 (seconds per minute) * 5 (minutes) =  5 minutes of delay
+    }
 
 
 
@@ -120,7 +147,14 @@ public class DataTrackerAPI {
             return data;
         }
 
-        public int getPlayerKills() {
+        public void saveToFlush(UUID playerUUID)
+        {
+            toFlush.put(playerUUID, this);
+        }
+
+        //===== Getting =====//
+
+        public int getPlayerKills(UUID uuid) {
             return playerKills;
         }
 
@@ -136,36 +170,48 @@ public class DataTrackerAPI {
             return spawnersMined;
         }
 
-        public void setPlayerKills(int amount) {
+        //===== Setting =====//
+
+        public void setPlayerKills(UUID playerUUID,int amount) {
             this.playerKills = amount;
+            this.saveToFlush(playerUUID);
         }
 
-        public void setPlayerDeaths(int amount) {
+        public void setPlayerDeaths(UUID playerUUID,int amount) {
             this.playerDeaths = amount;
+            this.saveToFlush(playerUUID);
         }
 
-        public void setBlocksBroken(int amount) {
+        public void setBlocksBroken(UUID playerUUID,int amount) {
             this.blocksBroken = amount;
+            this.saveToFlush(playerUUID);
         }
 
-        public void setSpawnersMined(int amount) {
+        public void setSpawnersMined(UUID playerUUID,int amount) {
             this.spawnersMined = amount;
+            this.saveToFlush(playerUUID);
         }
 
-        public void addPlayerKills(int amount) {
+        //===== Adding =====//
+
+        public void addPlayerKills(UUID playerUUID, int amount) {
             this.playerKills += amount;
+            this.saveToFlush(playerUUID);
         }
 
-        public void addPlayerDeaths(int amount) {
+        public void addPlayerDeaths(UUID playerUUID, int amount) {
             this.playerDeaths += amount;
+            this.saveToFlush(playerUUID);
         }
 
-        public void addBlocksBroken(int amount) {
+        public void addBlocksBroken(UUID playerUUID, int amount) {
             this.blocksBroken += amount;
+            this.saveToFlush(playerUUID);
         }
 
-        public void addSpawnersMined(int amount) {
+        public void addSpawnersMined(UUID playerUUID, int amount) {
             this.spawnersMined += amount;
+            this.saveToFlush(playerUUID);
         }
     }
 
