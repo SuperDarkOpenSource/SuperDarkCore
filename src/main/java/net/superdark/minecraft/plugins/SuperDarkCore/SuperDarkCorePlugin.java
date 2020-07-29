@@ -33,11 +33,8 @@ public class SuperDarkCorePlugin extends JavaPlugin
         // Don't leave memory leaking
         instance_ = null;
 
-        //flush it down the toilet
-        dataTrackerAPI_.flush();
-
-        //Flush the logs
-        loggerAPI_.flush();
+        //flush what needs to be flushed to disk
+        flush();
 
         destroyAPIs();
     }
@@ -96,6 +93,15 @@ public class SuperDarkCorePlugin extends JavaPlugin
         config.addDefault("LOG_TICK_INTERVAL", 6000);
         config.options().copyDefaults(true);
         saveConfig();
+    }
+
+    private void flush()
+    {
+        //Flush PlayerDataObjects to disk
+        dataTrackerAPI_.flush();
+
+        //Flush the logs
+        loggerAPI_.flush();
     }
 
     private static SuperDarkCorePlugin instance_ = null;
