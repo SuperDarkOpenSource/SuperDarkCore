@@ -1,9 +1,6 @@
 package net.superdark.minecraft.plugins.SuperDarkCore;
 
-import net.superdark.minecraft.plugins.SuperDarkCore.api.DataTrackerAPI;
-import net.superdark.minecraft.plugins.SuperDarkCore.api.LoggerAPI;
-import net.superdark.minecraft.plugins.SuperDarkCore.api.PlayerAPI;
-import net.superdark.minecraft.plugins.SuperDarkCore.api.TeleportAPI;
+import net.superdark.minecraft.plugins.SuperDarkCore.api.*;
 import net.superdark.minecraft.plugins.SuperDarkCore.listeners.PlayerEvents;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -25,6 +22,7 @@ public class SuperDarkCorePlugin extends JavaPlugin
 
         //Register our events
         createEvents();
+
     }
 
     @Override
@@ -62,6 +60,10 @@ public class SuperDarkCorePlugin extends JavaPlugin
         return dataTrackerAPI_;
     }
 
+    public WebhookAPI getWebhookAPI_() {
+        return webhookAPI_;
+    }
+
     //getConfig is a FileConfiguration method
     public FileConfiguration getSuperDarkCoreConfig() {
         return config;
@@ -73,6 +75,7 @@ public class SuperDarkCorePlugin extends JavaPlugin
         teleportAPI = new TeleportAPI(this);
         loggerAPI_ = new LoggerAPI(this);
         dataTrackerAPI_ = new DataTrackerAPI(this);
+        webhookAPI_ = new WebhookAPI(this);
     }
 
     private void destroyAPIs()
@@ -86,6 +89,7 @@ public class SuperDarkCorePlugin extends JavaPlugin
     {
         new PlayerEvents(instance_, playerAPI_);
     }
+
 
     private void loadDefaultConfig()
     {
@@ -115,4 +119,6 @@ public class SuperDarkCorePlugin extends JavaPlugin
     private FileConfiguration config;
 
     private DataTrackerAPI dataTrackerAPI_;
+
+    private WebhookAPI webhookAPI_;
 }
