@@ -95,7 +95,9 @@ public class SuperDarkCorePlugin extends JavaPlugin
     {
         this.config = getConfig();
         config.addDefault("LOG_TICK_INTERVAL", 6000);
+        config.addDefault("DisableDiscordWebhook", false);
         config.addDefault("DiscordWebhook", "WEBHOOK_HERE");
+        config.addDefault("serverTag", "Change your server tag in the config.");
         config.options().copyDefaults(true);
         saveConfig();
     }
