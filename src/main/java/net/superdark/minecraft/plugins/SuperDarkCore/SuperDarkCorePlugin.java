@@ -47,20 +47,20 @@ public class SuperDarkCorePlugin extends JavaPlugin
         return playerAPI_;
     }
 
-    public TeleportAPI getTeleportAPI()
+    public TeleportAPI getTeleportAPI_()
     {
-        return teleportAPI;
+        return teleportAPI_;
     }
 
-    public LoggerAPI getLoggerAPI_() {
+    public LoggerAPI getLoggerAPI() {
         return loggerAPI_;
 	}
 
-    public DataTrackerAPI getDataTrackerAPI_() {
+    public DataTrackerAPI getDataTrackerAPI() {
         return dataTrackerAPI_;
     }
 
-    public WebhookAPI getWebhookAPI_() {
+    public WebhookAPI getWebhookAPI() {
         return webhookAPI_;
     }
 
@@ -72,7 +72,7 @@ public class SuperDarkCorePlugin extends JavaPlugin
     private void createAPIs()
     {
         playerAPI_ = new PlayerAPI(this);
-        teleportAPI = new TeleportAPI(this);
+        teleportAPI_ = new TeleportAPI(this);
         loggerAPI_ = new LoggerAPI(this);
         dataTrackerAPI_ = new DataTrackerAPI(this);
         webhookAPI_ = new WebhookAPI(this);
@@ -81,7 +81,7 @@ public class SuperDarkCorePlugin extends JavaPlugin
     private void destroyAPIs()
     {
         playerAPI_ = null;
-        teleportAPI = null;
+        teleportAPI_ = null;
         loggerAPI_ = null;
     }
 
@@ -115,7 +115,7 @@ public class SuperDarkCorePlugin extends JavaPlugin
 
     private PlayerAPI playerAPI_;
 
-    private TeleportAPI teleportAPI;
+    private TeleportAPI teleportAPI_;
 
     private LoggerAPI loggerAPI_;
 
