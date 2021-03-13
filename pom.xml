@@ -6,7 +6,7 @@
 
     <groupId>net.superdark.minecraft.plugins</groupId>
     <artifactId>SuperDarkCore</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.1.0</version>
 
     <repositories>
         <repository>
