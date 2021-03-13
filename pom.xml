@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>net.superdark.minecraft.plugins</groupId>
-    <artifactId>SuperDarkCore</artifactId>
-    <version>0.1.0</version>
+    <artifactId>superdarkcore</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
 
     <repositories>
         <repository>
