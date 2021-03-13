@@ -17,6 +17,11 @@
 
     <!-- For Deploying to our Maven Server. DO NOT COPY TO OTHER NON-LIBRARY PLUGINS -->
     <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>Github SuperDarkCore</name>
+            <url>https://maven.pkg.github.com/SuperDarkOpenSource/minecraft-SuperDarkCore</url>
+        </repository>
     </distributionManagement>
 
     <dependencies>
