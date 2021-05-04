@@ -1,4 +1,4 @@
-package net.superdark.minecraft.plugins.SuperDarkCore.api;
+package net.superdark.minecraft.plugins.SuperDarkCore.services;
 
 import com.google.gson.JsonObject;
 import net.superdark.minecraft.plugins.SuperDarkCore.SuperDarkCorePlugin;
@@ -10,10 +10,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URL;
 
-public class WebhookAPI
+public class WebhookService
 {
 
-    public WebhookAPI(SuperDarkCorePlugin pl)
+    public WebhookService(SuperDarkCorePlugin pl)
     {
         this.plugin_ = pl;
         this.superdarkConfig = this.plugin_.getSuperDarkCoreConfig();

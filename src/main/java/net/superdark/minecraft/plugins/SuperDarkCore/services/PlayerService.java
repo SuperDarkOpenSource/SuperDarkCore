@@ -1,4 +1,4 @@
-package net.superdark.minecraft.plugins.SuperDarkCore.api;
+package net.superdark.minecraft.plugins.SuperDarkCore.services;
 
 import net.superdark.minecraft.plugins.SuperDarkCore.SuperDarkCorePlugin;
 import org.bukkit.entity.Player;
@@ -8,9 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class PlayerAPI
+public class PlayerService
 {
-    public PlayerAPI(SuperDarkCorePlugin plugin)
+    public PlayerService(SuperDarkCorePlugin plugin)
     {
         superDarkCorePlugin_ = plugin;
     }

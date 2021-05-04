@@ -1,6 +1,6 @@
 package net.superdark.minecraft.plugins.SuperDarkCore;
 
-import net.superdark.minecraft.plugins.SuperDarkCore.api.*;
+import net.superdark.minecraft.plugins.SuperDarkCore.services.*;
 import net.superdark.minecraft.plugins.SuperDarkCore.listeners.PlayerEvents;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -42,26 +42,26 @@ public class SuperDarkCorePlugin extends JavaPlugin
         return instance_;
     }
 
-    public PlayerAPI getPlayerAPI()
+    public PlayerService getPlayerAPI()
     {
-        return playerAPI_;
+        return playerService_;
     }
 
-    public TeleportAPI getTeleportAPI_()
+    public TeleportService getTeleportAPI_()
     {
-        return teleportAPI_;
+        return teleportService_;
     }
 
-    public LoggerAPI getLoggerAPI() {
-        return loggerAPI_;
+    public LoggerService getLoggerAPI() {
+        return loggerService_;
 	}
 
-    public DataTrackerAPI getDataTrackerAPI() {
+    public DataTrackerService getDataTrackerAPI() {
         return dataTrackerAPI_;
     }
 
-    public WebhookAPI getWebhookAPI() {
-        return webhookAPI_;
+    public WebhookService getWebhookAPI() {
+        return webhookService_;
     }
 
     //getConfig is a FileConfiguration method
@@ -71,23 +71,23 @@ public class SuperDarkCorePlugin extends JavaPlugin
 
     private void createAPIs()
     {
-        playerAPI_ = new PlayerAPI(this);
-        teleportAPI_ = new TeleportAPI(this);
-        loggerAPI_ = new LoggerAPI(this);
-        dataTrackerAPI_ = new DataTrackerAPI(this);
-        webhookAPI_ = new WebhookAPI(this);
+        playerService_ = new PlayerService(this);
+        teleportService_ = new TeleportService(this);
+        loggerService_ = new LoggerService(this);
+        dataTrackerAPI_ = new DataTrackerService(this);
+        webhookService_ = new WebhookService(this);
     }
 
     private void destroyAPIs()
     {
-        playerAPI_ = null;
-        teleportAPI_ = null;
-        loggerAPI_ = null;
+        playerService_ = null;
+        teleportService_ = null;
+        loggerService_ = null;
     }
 
     private void createEvents()
     {
-        new PlayerEvents(instance_, playerAPI_);
+        new PlayerEvents(instance_, playerService_);
     }
 
 
@@ -108,20 +108,20 @@ public class SuperDarkCorePlugin extends JavaPlugin
         dataTrackerAPI_.flush();
 
         //Flush the logs
-        loggerAPI_.flush();
+        loggerService_.flush();
     }
 
     private static SuperDarkCorePlugin instance_ = null;
 
-    private PlayerAPI playerAPI_;
+    private PlayerService playerService_;
 
-    private TeleportAPI teleportAPI_;
+    private TeleportService teleportService_;
 
-    private LoggerAPI loggerAPI_;
+    private LoggerService loggerService_;
 
     private FileConfiguration config;
 
-    private DataTrackerAPI dataTrackerAPI_;
+    private DataTrackerService dataTrackerAPI_;
 
-    private WebhookAPI webhookAPI_;
+    private WebhookService webhookService_;
 }

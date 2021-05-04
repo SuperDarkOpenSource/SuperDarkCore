@@ -1,4 +1,4 @@
-package net.superdark.minecraft.plugins.SuperDarkCore.api;
+package net.superdark.minecraft.plugins.SuperDarkCore.services;
 
 import net.superdark.minecraft.plugins.SuperDarkCore.SuperDarkCorePlugin;
 import org.bukkit.configuration.ConfigurationSection;
@@ -15,13 +15,13 @@ import java.util.*;
  * The current plan for the DataTrackApi is to have each player's data be in a YAML file where the name of the file is the player's Minecraft UUID.
  *
  */
-public class DataTrackerAPI {
+public class DataTrackerService {
 
     private SuperDarkCorePlugin superDarkCorePlugin_;
 
     private HashMap<UUID, PlayerDataObject> toFlush = new LinkedHashMap<>();
 
-    public DataTrackerAPI(SuperDarkCorePlugin instance)
+    public DataTrackerService(SuperDarkCorePlugin instance)
     {
         this.superDarkCorePlugin_ = instance;
         this.flushTask();
