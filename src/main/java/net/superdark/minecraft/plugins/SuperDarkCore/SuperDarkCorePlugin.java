@@ -1,9 +1,14 @@
 package net.superdark.minecraft.plugins.SuperDarkCore;
 
+import net.superdark.minecraft.plugins.SuperDarkCore.registration.AbstractPluginRegistration;
 import net.superdark.minecraft.plugins.SuperDarkCore.services.*;
 import net.superdark.minecraft.plugins.SuperDarkCore.listeners.PlayerEvents;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 public class SuperDarkCorePlugin extends JavaPlugin
 {
@@ -18,7 +23,7 @@ public class SuperDarkCorePlugin extends JavaPlugin
         loadDefaultConfig();
 
         // Create our APIs
-        createAPIs();
+        loadServices();
 
         //Register our events
         createEvents();
@@ -42,25 +47,25 @@ public class SuperDarkCorePlugin extends JavaPlugin
         return instance_;
     }
 
-    public PlayerService getPlayerAPI()
+    public PlayerService getPlayerService()
     {
         return playerService_;
     }
 
-    public TeleportService getTeleportAPI_()
+    public TeleportService getTeleportService()
     {
         return teleportService_;
     }
 
-    public LoggerService getLoggerAPI() {
+    public LoggerService getLoggerService() {
         return loggerService_;
 	}
 
-    public DataTrackerService getDataTrackerAPI() {
+    public DataTrackerService getDataTrackerService() {
         return dataTrackerAPI_;
     }
 
-    public WebhookService getWebhookAPI() {
+    public WebhookService getWebhookService() {
         return webhookService_;
     }
 
@@ -69,7 +74,7 @@ public class SuperDarkCorePlugin extends JavaPlugin
         return config;
     }
 
-    private void createAPIs()
+    private void loadServices()
     {
         playerService_ = new PlayerService(this);
         teleportService_ = new TeleportService(this);
@@ -111,7 +116,19 @@ public class SuperDarkCorePlugin extends JavaPlugin
         loggerService_.flush();
     }
 
+    public void registerPlugin(AbstractPluginRegistration plugin)
+    {
+        this.registeredPlugins.add(plugin);
+    }
+
+    private List<AbstractPluginRegistration> getRegisteredPlugins()
+    {
+        return this.registeredPlugins;
+    }
+
     private static SuperDarkCorePlugin instance_ = null;
+
+    private List<AbstractPluginRegistration> registeredPlugins;
 
     private PlayerService playerService_;
 

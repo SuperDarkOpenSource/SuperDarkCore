@@ -29,7 +29,7 @@ public class PlayerEvents implements Listener {
 
         this.plugin_ = instance_;
         this.playerService_ = playerService_;
-        this.webhookService_ = this.plugin_.getWebhookAPI();
+        this.webhookService_ = this.plugin_.getWebhookService();
         this.serverTag = this.plugin_.getConfig().getString("serverTag");
 
         //player can be connected before a plugin register, so check for players and add them.
