@@ -1,13 +1,11 @@
 package net.superdark.minecraft.plugins.SuperDarkCore;
 
-import net.superdark.minecraft.plugins.SuperDarkCore.registration.AbstractPluginRegistration;
+import net.superdark.minecraft.plugins.SuperDarkCore.registration.BaseSuperDarkPlugin;
 import net.superdark.minecraft.plugins.SuperDarkCore.services.*;
 import net.superdark.minecraft.plugins.SuperDarkCore.listeners.PlayerEvents;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 public class SuperDarkCorePlugin extends JavaPlugin
@@ -116,19 +114,19 @@ public class SuperDarkCorePlugin extends JavaPlugin
         loggerService_.flush();
     }
 
-    public void registerPlugin(AbstractPluginRegistration plugin)
+    public void registerPlugin(BaseSuperDarkPlugin plugin)
     {
         this.registeredPlugins.add(plugin);
     }
 
-    private List<AbstractPluginRegistration> getRegisteredPlugins()
+    private List<BaseSuperDarkPlugin> getRegisteredPlugins()
     {
         return this.registeredPlugins;
     }
 
     private static SuperDarkCorePlugin instance_ = null;
 
-    private List<AbstractPluginRegistration> registeredPlugins;
+    private List<BaseSuperDarkPlugin> registeredPlugins;
 
     private PlayerService playerService_;
 
