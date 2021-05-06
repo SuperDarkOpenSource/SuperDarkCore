@@ -8,7 +8,7 @@ GPL3. All Rights Reserved. Copyright (C) Russell Johnson and Casey johnson 2021.
 This core plugin is going to be easy to use. First, you will not need to extend the default Spigot JavaPlugin.
 In your main class, extend our abstract class AbstractPluginRegistration, and provide a  plugin name as a
 parameter.
-
+## Building
 ### Command line building
 ```shell script
 mvn package
