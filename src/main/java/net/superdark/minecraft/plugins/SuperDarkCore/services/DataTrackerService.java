@@ -38,12 +38,8 @@ public class DataTrackerService {
             if(!file.exists())
             {
                 file.getParentFile().mkdirs();
-            }
-            if (superDarkCorePlugin_.getResource(uuid.toString() + ".yml") == null)
-            {
                 file.createNewFile();
             }
-
         } catch (IOException err) {
             err.printStackTrace();
         }
