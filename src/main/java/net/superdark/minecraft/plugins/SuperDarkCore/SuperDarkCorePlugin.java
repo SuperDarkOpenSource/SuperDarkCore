@@ -83,7 +83,7 @@ public class SuperDarkCorePlugin extends JavaPlugin
 
     /**
      * Uses reflection to pull commands from a package location and register them.
-     * Each command will be  loaded
+     * Each command will be registered to their respective plugins.
      * @param packageLocation Full string pack location. For example: net.superdark.minecraft.plugins.SuperDarkCore.commands
      * @param plugin The plugin to register the commands for.
      */
