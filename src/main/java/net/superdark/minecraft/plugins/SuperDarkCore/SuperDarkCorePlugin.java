@@ -27,7 +27,7 @@ public class SuperDarkCorePlugin extends JavaPlugin
 
         //Register our events
         createEvents();
-        loadCommands();
+        registerCommands("net.superdark.minecraft.plugins.SuperDarkCore.commands", this); //Package location for SuperDarkCore commands.
 
     }
 
@@ -81,24 +81,34 @@ public class SuperDarkCorePlugin extends JavaPlugin
         saveConfig();
     }
 
-    private void loadCommands()
+    /**
+     * Uses reflection to pull commands from a package location and register them.
+     * Each command will be  loaded
+     * @param packageLocation Full string pack location. For example: net.superdark.minecraft.plugins.SuperDarkCore.commands
+     * @param plugin The plugin to register the commands for.
+     */
+    public void registerCommands(String packageLocation, JavaPlugin plugin)
     {
-        for(Map.Entry<String, CommandExecutor> entry : CommandReflection.getCommands("net.superdark.minecraft.plugins.SuperDarkCore.commands").entrySet())
+        for(Map.Entry<String, CommandExecutor> entry : CommandReflection.getCommands(packageLocation).entrySet())
         {
             if(entry.getKey() == null)
             {
-                loggerService_.log("There was a command that name that was null, and it was not added to executable commands.");
+                this.getLogger().severe("There was a command that name that was null, and it was not added to executable commands.");
                 continue;
             }
 
             if(entry.getValue() == null)
             {
-                loggerService_.log("The command annotated with the name \"" + entry.getKey() + "\" was null and not added to executable commands.");
+                this.getLogger().severe("The command passed was null. The command will not be registered. Re-check your classes are annotated correctly and extend CommandExecutor or contact an admin.");
+                continue;
             }
-            this.getCommand(entry.getKey()).setExecutor(entry.getValue());
+            plugin.getCommand(entry.getKey()).setExecutor(entry.getValue());
         }
     }
 
+    /**
+     * Flushes all data saved to RAM to disk.
+     */
     private void flush()
     {
         //Flush PlayerDataObjects to disk
