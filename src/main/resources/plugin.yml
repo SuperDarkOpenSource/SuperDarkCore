@@ -11,3 +11,8 @@ permissions:
   superdark.admin:
     description: Gives admin permssion to user.
     default: op
+
+commands:
+  sdadmin:
+    usage: /sdadmin
+    permission: superdark.admin

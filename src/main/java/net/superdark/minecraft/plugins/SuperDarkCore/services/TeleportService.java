@@ -1,4 +1,4 @@
-package net.superdark.minecraft.plugins.SuperDarkCore.api;
+package net.superdark.minecraft.plugins.SuperDarkCore.services;
 
 import net.superdark.minecraft.plugins.SuperDarkCore.SuperDarkCorePlugin;
 import org.bukkit.Location;
@@ -7,11 +7,11 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class TeleportAPI {
+public class TeleportService {
 
     private SuperDarkCorePlugin plugin_;
 
-    public TeleportAPI(SuperDarkCorePlugin plugin)
+    public TeleportService(SuperDarkCorePlugin plugin)
     {
         this.plugin_ = plugin;
     }
