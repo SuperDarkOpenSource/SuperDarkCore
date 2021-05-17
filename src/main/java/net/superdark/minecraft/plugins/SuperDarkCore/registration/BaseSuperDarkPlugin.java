@@ -7,7 +7,7 @@ public abstract class BaseSuperDarkPlugin extends JavaPlugin
 {
     private SuperDarkCorePlugin corePlugin_;
 
-    public BaseSuperDarkPlugin(String pluginName)
+    private void register(String pluginName)
     {
         this.corePlugin_ = SuperDarkCorePlugin.getInstance();
 
