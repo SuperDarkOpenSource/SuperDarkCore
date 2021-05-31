@@ -1,12 +1,10 @@
 package net.superdark.minecraft.plugins.SuperDarkCore.services;
 
 import net.superdark.minecraft.plugins.SuperDarkCore.SuperDarkCorePlugin;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class PlayerService
 {
@@ -22,7 +20,7 @@ public class PlayerService
      */
     public void registerPlayer (String player, UUID uuid)
     {
-        onlineUserNameMap.put(player, uuid);
+        onlineUserNameMap.put(player.toLowerCase(Locale.ROOT), uuid);
         if (isAdmin(player))
         {
             registerAdmin(this.superDarkCorePlugin_.getServer().getPlayer(player));
@@ -86,15 +84,48 @@ public class PlayerService
         return isAdmin(player);
     }
 
+    /**
+     * Checks if the player is stored as an online player in this PlayerService.
+     * @param name Player's username.
+     * @return TRUE if the player was found, FALSE otherwise.
+     */
+    public boolean isPlayerConnected(String name)
+    {
+        return this.onlineUserNameMap.containsKey(name);
+    }
+
+    /**
+     * Gets a player object from online players.
+     * @param playerName Player's in-game username.
+     * @return Player Object if the user is online, NULL otherwise.
+     */
+    public Player getPlayer(String playerName)
+    {
+        if(isPlayerConnected(playerName))
+        {
+            return Bukkit.getPlayer(this.onlineUserNameMap.get(playerName));
+        }
+        return null;
+    }
+
+    /**
+     * Gets a player's UUID only if they are online.
+     * @param playerName Player's in-game name.
+     * @return Player's UUID if it exists, NULL if it does not.
+     */
+    public UUID getPlayerUUID(String playerName)
+    {
+        return this.onlineUserNameMap.get(playerName);
+    }
+
+    @Deprecated
     public Map<String, UUID> getOnlineUserNameMap()
     {
         return this.onlineUserNameMap;
     }
 
     private Map<String, UUID> onlineUserNameMap = new HashMap<>();
-
     private ArrayList<Player> adminPlayerObjectList = new ArrayList<>();
-
     private SuperDarkCorePlugin superDarkCorePlugin_;
 
 }
