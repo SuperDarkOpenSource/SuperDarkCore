@@ -84,6 +84,11 @@ public class PlayerService
         return isAdmin(player);
     }
 
+    /**
+     * Checks if the player is stored as an online player in this PlayerService.
+     * @param name Player's username.
+     * @return TRUE if the player was found, FALSE otherwise.
+     */
     public boolean isPlayerConnected(String name)
     {
         return this.onlineUserNameMap.containsKey(name);
