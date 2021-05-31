@@ -89,6 +89,11 @@ public class PlayerService
         return this.onlineUserNameMap.containsKey(name);
     }
 
+    /**
+     * Gets a player object from online players.
+     * @param playerName Player's in-game username.
+     * @return Player Object if the user is online, NULL otherwise.
+     */
     public Player getPlayer(String playerName)
     {
         if(isPlayerConnected(playerName))
@@ -98,6 +103,11 @@ public class PlayerService
         return null;
     }
 
+    /**
+     * Gets a player's UUID only if they are online.
+     * @param playerName Player's in-game name.
+     * @return Player's UUID if it exists, NULL if it does not.
+     */
     public UUID getPlayerUUID(String playerName)
     {
         return this.onlineUserNameMap.get(playerName);
