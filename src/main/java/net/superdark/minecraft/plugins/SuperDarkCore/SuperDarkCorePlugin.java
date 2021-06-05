@@ -89,21 +89,8 @@ public class SuperDarkCorePlugin extends JavaPlugin
      */
     public void registerCommands(String packageLocation, JavaPlugin plugin)
     {
-        for(Map.Entry<String, CommandExecutor> entry : CommandReflection.getCommands(packageLocation).entrySet())
-        {
-            if(entry.getKey() == null)
-            {
-                this.getLogger().severe("There was a command that name that was null, and it was not added to executable commands.");
-                continue;
-            }
-
-            if(entry.getValue() == null)
-            {
-                this.getLogger().severe("The command passed was null. The command will not be registered. Re-check your classes are annotated correctly and extend CommandExecutor or contact an admin.");
-                continue;
-            }
-            plugin.getCommand(entry.getKey()).setExecutor(entry.getValue());
-        }
+        // Register all commands now
+        CommandReflection.RegisterCommands(this, "net.superdark.minecraft.plugins.SuperDarkCore.commands");
     }
 
     /**
