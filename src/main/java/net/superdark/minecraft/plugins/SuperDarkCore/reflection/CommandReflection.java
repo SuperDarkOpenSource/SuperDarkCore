@@ -59,7 +59,7 @@ public class CommandReflection
 
                 plugin.getCommand(command.Name()).setExecutor(executor);
 
-                if(command.Aliases().isBlank())
+                if(!command.Aliases().isBlank())
                 {
                     String[] commandAliases = command.Aliases().split(",");
 
