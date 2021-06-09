@@ -1,5 +1,6 @@
 package net.superdark.minecraft.plugins.SuperDarkCore;
 
+import net.superdark.minecraft.plugins.SuperDarkCore.json.Json;
 import net.superdark.minecraft.plugins.SuperDarkCore.reflection.CommandReflection;
 import net.superdark.minecraft.plugins.SuperDarkCore.registration.BaseSuperDarkPlugin;
 import net.superdark.minecraft.plugins.SuperDarkCore.services.*;
@@ -55,6 +56,7 @@ public class SuperDarkCorePlugin extends JavaPlugin
         loggerService_ = new LoggerService(this);
         dataTrackerAPI_ = new DataTrackerService(this);
         webhookService_ = new WebhookService(this);
+        JsonService_ = new Json();
     }
 
     private void destroyAPIs()
@@ -159,4 +161,6 @@ public class SuperDarkCorePlugin extends JavaPlugin
     private DataTrackerService dataTrackerAPI_;
 
     private WebhookService webhookService_;
+
+    private Json JsonService_;
 }
