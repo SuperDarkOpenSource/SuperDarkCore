@@ -16,3 +16,12 @@ commands:
   sdadmin:
     usage: /sdadmin
     permission: superdark.admin
+  test:
+    usage: /test
+    permission: superdark.admin
+  t:
+    usage: /test
+    permission: superdark.admin
+  t1:
+    usage: /test
+    permission: superdark.admin

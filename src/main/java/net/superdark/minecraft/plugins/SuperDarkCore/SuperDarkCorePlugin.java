@@ -1,5 +1,6 @@
 package net.superdark.minecraft.plugins.SuperDarkCore;
 
+import net.superdark.minecraft.plugins.SuperDarkCore.json.Json;
 import net.superdark.minecraft.plugins.SuperDarkCore.reflection.CommandReflection;
 import net.superdark.minecraft.plugins.SuperDarkCore.registration.BaseSuperDarkPlugin;
 import net.superdark.minecraft.plugins.SuperDarkCore.services.*;
@@ -55,6 +56,7 @@ public class SuperDarkCorePlugin extends JavaPlugin
         loggerService_ = new LoggerService(this);
         dataTrackerAPI_ = new DataTrackerService(this);
         webhookService_ = new WebhookService(this);
+        JsonService_ = new Json();
     }
 
     private void destroyAPIs()
@@ -89,21 +91,8 @@ public class SuperDarkCorePlugin extends JavaPlugin
      */
     public void registerCommands(String packageLocation, JavaPlugin plugin)
     {
-        for(Map.Entry<String, CommandExecutor> entry : CommandReflection.getCommands(packageLocation).entrySet())
-        {
-            if(entry.getKey() == null)
-            {
-                this.getLogger().severe("There was a command that name that was null, and it was not added to executable commands.");
-                continue;
-            }
-
-            if(entry.getValue() == null)
-            {
-                this.getLogger().severe("The command passed was null. The command will not be registered. Re-check your classes are annotated correctly and extend CommandExecutor or contact an admin.");
-                continue;
-            }
-            plugin.getCommand(entry.getKey()).setExecutor(entry.getValue());
-        }
+        // Register all commands now
+        CommandReflection.RegisterCommands(this, "net.superdark.minecraft.plugins.SuperDarkCore.commands");
     }
 
     /**
@@ -172,4 +161,6 @@ public class SuperDarkCorePlugin extends JavaPlugin
     private DataTrackerService dataTrackerAPI_;
 
     private WebhookService webhookService_;
+
+    private Json JsonService_;
 }
