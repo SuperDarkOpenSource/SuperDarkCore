@@ -18,17 +18,9 @@
     <!-- For Deploying to our Maven Server. DO NOT COPY TO OTHER NON-LIBRARY PLUGINS -->
     <distributionManagement>
         <snapshotRepository>
-            <id>github-snapshot</id>
-            <name>GitHub snapshot</name>
-            <url>https://maven.pkg.github.com/SuperDarkOpenSource/maven-packages/</url>
-            <uniqueVersion>true</uniqueVersion>
+            <id>superdark-maven</id>
+            <url>https://nexus.superdark.net/repository/maven/</url>
         </snapshotRepository>
-        <repository>
-            <id>github-release</id>
-            <name>Github Release</name>
-            <url>https://maven.pkg.github.com/SuperDarkOpenSource/maven-packages/</url>
-            <uniqueVersion>false</uniqueVersion>
-        </repository>
     </distributionManagement>
 
     <dependencies>
