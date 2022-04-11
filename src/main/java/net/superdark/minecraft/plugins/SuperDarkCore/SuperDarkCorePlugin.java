@@ -1,17 +1,16 @@
 package net.superdark.minecraft.plugins.SuperDarkCore;
 
 import net.superdark.minecraft.plugins.SuperDarkCore.json.Json;
+import net.superdark.minecraft.plugins.SuperDarkCore.logger.TraceLogger;
 import net.superdark.minecraft.plugins.SuperDarkCore.reflection.CommandReflection;
 import net.superdark.minecraft.plugins.SuperDarkCore.registration.BaseSuperDarkPlugin;
 import net.superdark.minecraft.plugins.SuperDarkCore.services.*;
 import net.superdark.minecraft.plugins.SuperDarkCore.listeners.PlayerEvents;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class SuperDarkCorePlugin extends JavaPlugin
 {
@@ -53,7 +52,7 @@ public class SuperDarkCorePlugin extends JavaPlugin
     {
         playerService_ = new PlayerService(this);
         teleportService_ = new TeleportService(this);
-        loggerService_ = new LoggerService(this);
+        traceLogger_ = new TraceLogger(this);
         dataTrackerAPI_ = new DataTrackerService(this);
         webhookService_ = new WebhookService(this);
         JsonService_ = new Json();
@@ -63,7 +62,7 @@ public class SuperDarkCorePlugin extends JavaPlugin
     {
         playerService_ = null;
         teleportService_ = null;
-        loggerService_ = null;
+        traceLogger_ = null;
     }
 
     private void createEvents()
@@ -104,7 +103,7 @@ public class SuperDarkCorePlugin extends JavaPlugin
         dataTrackerAPI_.flush();
 
         //Flush the logs
-        loggerService_.flush();
+        traceLogger_.flush();
     }
 
     //Getters
@@ -123,8 +122,8 @@ public class SuperDarkCorePlugin extends JavaPlugin
         return teleportService_;
     }
 
-    public LoggerService getLoggerService() {
-        return loggerService_;
+    public TraceLogger getLoggerService() {
+        return traceLogger_;
     }
 
     public DataTrackerService getDataTrackerService() {
@@ -154,7 +153,7 @@ public class SuperDarkCorePlugin extends JavaPlugin
 
     private TeleportService teleportService_;
 
-    private LoggerService loggerService_;
+    private TraceLogger traceLogger_;
 
     private FileConfiguration config;
 

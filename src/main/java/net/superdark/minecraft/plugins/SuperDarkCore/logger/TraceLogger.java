@@ -1,4 +1,4 @@
-package net.superdark.minecraft.plugins.SuperDarkCore.services;
+package net.superdark.minecraft.plugins.SuperDarkCore.logger;
 
 import net.superdark.minecraft.plugins.SuperDarkCore.SuperDarkCorePlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -10,7 +10,7 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class LoggerService {
+public class TraceLogger {
 
     private SuperDarkCorePlugin superDarkCorePlugin_;
 
@@ -18,7 +18,7 @@ public class LoggerService {
 
     private ArrayList<String> logList = new ArrayList<>();
 
-    public LoggerService(SuperDarkCorePlugin plugin)
+    public TraceLogger(SuperDarkCorePlugin plugin)
     {
         this.superDarkCorePlugin_ = plugin;
         this.flushTask();
