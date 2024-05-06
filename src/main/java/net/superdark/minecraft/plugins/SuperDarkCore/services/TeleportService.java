@@ -36,14 +36,14 @@ public class TeleportService {
          * @param z Z-Coordinate to teleport player to.
          * @return TRUE if a safe place for a player to spawn was found and the player was attempted to be teleported, FALSE if the world does not exist, the player does not exist, or a safe location was not found.
          */
-        public boolean safeTeleportAboveGround(@NotNull World world, @NotNull Player player, double x, double z)
+        public static boolean safeTeleportAboveGround(@NotNull World world, @NotNull Player player, double x, double z)
         {
-            double y = 255.0; // Build height for minecraft.
+            double y = 320.0; // Build height for minecraft.
             Location locationToTeleportTo = new Location(world, x, y, z);
 
             while (locationToTeleportTo.getBlock().getType().equals(Material.AIR))
             {
-                if (locationToTeleportTo.getBlockY() < 5) return false; // return false if the location goes below where bedrock spawns (y = 5).
+                if (locationToTeleportTo.getBlockY() < -59) return false; // return false if the location goes below where bedrock spawns (y = -65).
                 locationToTeleportTo.setY(locationToTeleportTo.getBlockY() - 1);
             }
             locationToTeleportTo.setY(locationToTeleportTo.getBlockY() + 1); // The block that the location is currently at is a solid block, add 1 to prevent them from spawning inside a block.
@@ -52,7 +52,7 @@ public class TeleportService {
         }
 
         /**
-         * Attempts to teleport a player safely starting from where bedrock starts spawning (y = 5).
+         * Attempts to teleport a player safely starting from where bedrock starts spawning (y = -59).
          * @param world World object that the player will be teleported in.
          * @param player Bukkit player object used to teleport the player.
          * @param x X-Coordinate to teleport player to.
@@ -61,7 +61,7 @@ public class TeleportService {
          */
         public boolean safeTeleportAnywhere(@NotNull World world, @NotNull Player player, double x, double z)
         {
-            double y = 5.0; // Where bedrock starts to spawn for minecraft.
+            double y = -59.0; // Where bedrock starts to spawn for minecraft.
 
             Location locationToTeleportTo = new Location(world, x, y, z);
             Location checkBlockAboveFirstLocation =  new Location(world, x, y + 1, z);
