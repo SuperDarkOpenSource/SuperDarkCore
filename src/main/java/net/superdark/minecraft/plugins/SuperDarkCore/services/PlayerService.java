@@ -79,7 +79,7 @@ public class PlayerService
      */
     public boolean isAdmin(String s)
     {
-        Player player = superDarkCorePlugin_.getServer().getPlayer(onlineUserNameMap.get(s));
+        Player player = superDarkCorePlugin_.getServer().getPlayer(onlineUserNameMap.get(s.toLowerCase(Locale.ROOT)));
         if(player == null) return false; // Player does not exist on the server currently, return false.
         return isAdmin(player);
     }
