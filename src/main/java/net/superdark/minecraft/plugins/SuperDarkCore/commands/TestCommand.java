@@ -40,6 +40,6 @@ public class TestCommand
             sender.sendMessage("Hello World " + b);
         }
         if (!(sender instanceof Player player)) return;
-        TeleportService.teleportTypes.safeTeleportAboveGround(player.getWorld(), player, 100.0, 100.0);
+        TeleportService.TeleportTypes.SafeTeleportAboveGround(player.getWorld(), player, 100.0, 100.0);
     }
 }

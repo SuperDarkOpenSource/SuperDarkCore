@@ -104,9 +104,8 @@ public class DataTrackerService {
             public void run() {
                 flush();
                 superDarkCorePlugin_.getLogger().info("Flushing PlayerDataObjects.");
-                this.runTaskLater(superDarkCorePlugin_, 6000);
             }
-        }.runTaskLater(superDarkCorePlugin_, 6000); //6000 ticks = 20(ticks per second) * 60 (seconds per minute) * 5 (minutes) =  5 minutes of delay
+        }.runTaskTimerAsynchronously(superDarkCorePlugin_, 6000, 6000); //6000 ticks = 20(ticks per second) * 60 (seconds per minute) * 5 (minutes) =  5 minutes of delay
     }
 
 
