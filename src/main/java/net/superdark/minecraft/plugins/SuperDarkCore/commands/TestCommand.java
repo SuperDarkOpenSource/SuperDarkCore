@@ -3,6 +3,7 @@ package net.superdark.minecraft.plugins.SuperDarkCore.commands;
 import net.superdark.minecraft.plugins.SuperDarkCore.reflection.CommandHandler;
 import net.superdark.minecraft.plugins.SuperDarkCore.reflection.Command;
 import net.superdark.minecraft.plugins.SuperDarkCore.reflection.CommandPermissionLevel;
+import net.superdark.minecraft.plugins.SuperDarkCore.services.TeleportService;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -34,12 +35,11 @@ public class TestCommand
     }
 
     @CommandHandler(Path = "{Int}.{Int}", PermissionLevel = CommandPermissionLevel.PLAYERS_ONLY)
-    public static void Test2(CommandSender sender, int a, int b)
-    {
-        for(int i = 0; i < a; i++)
-        {
+    public static void Test2(CommandSender sender, int a, int b) {
+        for (int i = 0; i < a; i++) {
             sender.sendMessage("Hello World " + b);
         }
+        if (!(sender instanceof Player player)) return;
+        TeleportService.TeleportTypes.SafeTeleportAboveGround(player.getWorld(), player, 100.0, 100.0);
     }
-
 }

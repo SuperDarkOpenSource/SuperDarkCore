@@ -36,7 +36,11 @@ public class CommandReflection
             {
                 try
                 {
-                    delegates.add(new CommandDelegate(m.getAnnotation(CommandHandler.class), m));
+                    CommandHandler cmdHandler = m.getAnnotation(CommandHandler.class);
+
+                    if(cmdHandler == null) continue;
+
+                    delegates.add(new CommandDelegate(cmdHandler, m));
                 }
                 catch (IllegalArgumentException e)
                 {

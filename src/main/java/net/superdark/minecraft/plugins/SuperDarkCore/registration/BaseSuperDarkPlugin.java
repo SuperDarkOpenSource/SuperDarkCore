@@ -13,7 +13,6 @@ public abstract class BaseSuperDarkPlugin extends JavaPlugin
 
         corePlugin_.registerPlugin(this);
 
-        corePlugin_.getLoggerService().log("Child plugin '" + pluginName + "' was found and registered.");
     }
 
 }

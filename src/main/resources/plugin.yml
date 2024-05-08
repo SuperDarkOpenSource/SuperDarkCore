@@ -17,11 +17,13 @@ commands:
     usage: /sdadmin
     permission: superdark.admin
   test:
+    aliases:
+      - t
+      - t1
     usage: /test
     permission: superdark.admin
-  t:
-    usage: /test
-    permission: superdark.admin
-  t1:
-    usage: /test
+  rtp:
+    aliases:
+      - randomteleport
+    usage: /rtp (range)
     permission: superdark.admin
